@@ -52,10 +52,6 @@ class BreakfastController extends GetxController
 
       await _makananProvider.postBreakfast(body);
 
-      // Menampilkan notifikasi jika porsi berhasil diubah
-      showCustomSnackbar(
-          context, 'Berhasil mengedit porsi Breakfast', Colors.greenAccent);
-
       await getBreakfast();
 
       print('porsi : $porsi');
@@ -89,7 +85,6 @@ class BreakfastController extends GetxController
       change(result, status: RxStatus.success());
       isLoading.value = false;
 
-      // Get.snackbar('Success', 'Berhasil menghapus Breakfast');
       showCustomSnackbar(
           context, 'Berhasil menghapus Breakfast', Colors.greenAccent);
     } catch (e) {

@@ -50,10 +50,6 @@ class LunchController extends GetxController with StateMixin<List<FoodModel>> {
 
       await _makananProvider.postLunches(body);
 
-      // Menampilkan notifikasi jika porsi berhasil diubah
-      showCustomSnackbar(
-          context, 'Berhasil mengedit porsi Lunch', Colors.greenAccent);
-
       await getLunch();
 
       print('porsi : $porsi');
@@ -99,7 +95,6 @@ class LunchController extends GetxController with StateMixin<List<FoodModel>> {
 
       await _makananProvider.putLunches(body, id);
 
-      // Menampilkan notifikasi jika porsi berhasil diubah
       showCustomSnackbar(
           context, 'Berhasil mengedit porsi Lunch', Colors.greenAccent);
 

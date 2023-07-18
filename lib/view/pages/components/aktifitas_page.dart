@@ -47,54 +47,50 @@ class AktifitasPage extends GetView<SportController> {
           padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
           child: Column(
             children: [
-              TextFormField(
-                controller: controller.textEditingController,
-                focusNode: _searchFocusNode,
-                style: blackTextStyle.copyWith(
-                  fontWeight: medium,
-                  fontSize: 14,
-                ),
-                onChanged: (value) {
-                  controller.searchSport(value);
-                },
-                decoration: InputDecoration(
-                  isDense: true,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
+              GetBuilder<SportController>(
+                builder: (controller) => TextFormField(
+                  controller: controller.textEditingController,
+                  focusNode: _searchFocusNode,
+                  style: blackTextStyle.copyWith(
+                    fontWeight: medium,
+                    fontSize: 14,
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(15),
-                    borderSide: BorderSide(
-                      color: purpleColor,
+                  onChanged: (value) {
+                    controller.searchSport(value);
+                  },
+                  decoration: InputDecoration(
+                    isDense: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide(
+                        color: purpleColor,
+                      ),
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: greyColor,
+                    ),
+                    suffixIcon: controller.textEditingController.text.isNotEmpty
+                        ? GestureDetector(
+                            onTap: () {
+                              controller.clearSearch();
+                            },
+                            child: Icon(
+                              Icons.clear,
+                              color: purpleColor,
+                            ),
+                          )
+                        : null,
+                    hintText: "Pencarian aktivitas",
+                    hintStyle: greyTextStyle.copyWith(
+                      fontWeight: medium,
                     ),
                   ),
-                  prefixIcon: Icon(
-                    Icons.search,
-                    color: greyColor,
-                  ),
-                  suffixIcon: Obx(() {
-                    if (_searchFocusNode.hasFocus ||
-                        controller.searchQuery.value.isNotEmpty) {
-                      return GestureDetector(
-                        onTap: () {
-                          controller.clearSearch();
-                          _searchFocusNode.unfocus();
-                        },
-                        child: Icon(
-                          Icons.clear,
-                          color: purpleColor,
-                        ),
-                      );
-                    } else {
-                      return SizedBox.shrink();
-                    }
-                  }),
-                  hintText: "Pencarian aktifitas",
-                  hintStyle: greyTextStyle.copyWith(
-                    fontWeight: medium,
-                  ),
+                  cursorColor: purpleColor,
                 ),
-                cursorColor: purpleColor,
               ),
               controller.obx(
                 (data) => IconTheme(

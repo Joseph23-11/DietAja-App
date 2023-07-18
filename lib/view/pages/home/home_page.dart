@@ -480,7 +480,7 @@ class _HomePageState extends State<HomePage> {
                                             data.totalKaloriSnack!.toInt())) >=
                                     0
                                 ? Text(
-                                    'Makanan hari yg lalu',
+                                    'Makanan',
                                     style: whiteTextStyle.copyWith(
                                       fontSize: 16,
                                       fontWeight: medium,
@@ -916,7 +916,7 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Nutrisi hari yg lalu',
+                    'Nutrisi',
                     style: blackTextStyle.copyWith(
                       fontSize: 16,
                       fontWeight: semiBold,

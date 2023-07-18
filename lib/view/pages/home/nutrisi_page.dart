@@ -50,708 +50,740 @@ class _NutrisiPageState extends State<NutrisiPage> {
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             children: [
-              Obx(() => dailyDietController.isToday.value
-                  ? Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: whiteColor),
-                      padding: EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Makronutrisi",
-                            style: blackTextStyle.copyWith(
-                                fontSize: 16, fontWeight: semiBold),
-                          ),
-                          Obx(
-                            () => Row(
-                              children: [
-                                makronutrisi(
-                                  context,
-                                  palletChart,
-                                  [
-                                    ChartData(
-                                      'Karbohidrat',
-                                      (((breakfastController.breakfastKarbo.value +
-                                                  lunchController
-                                                      .lunchKarbo.value +
-                                                  dinnerController
-                                                      .dinnerKarbo.value +
-                                                  snackController
-                                                      .snackKarbo.value) /
-                                              (breakfastController
-                                                      .breakfastKarbo.value +
-                                                  lunchController
-                                                      .lunchKarbo.value +
-                                                  dinnerController
-                                                      .dinnerKarbo.value +
-                                                  snackController
-                                                      .snackKarbo.value +
-                                                  breakfastController
-                                                      .breakfastProtein.value +
-                                                  lunchController
-                                                      .lunchProtein.value +
-                                                  dinnerController
-                                                      .dinnerProtein.value +
-                                                  snackController
-                                                      .snackProtein.value +
-                                                  breakfastController
-                                                      .breakfastLemak.value +
-                                                  lunchController
-                                                      .lunchLemak.value +
-                                                  dinnerController
-                                                      .dinnerLemak.value +
-                                                  snackController
-                                                      .snackLemak.value +
-                                                  1)) *
-                                          100),
-                                    ),
-                                    ChartData(
-                                      'Protein',
-                                      (((breakfastController.breakfastProtein.value +
-                                                  lunchController
-                                                      .lunchProtein.value +
-                                                  dinnerController
-                                                      .dinnerProtein.value +
-                                                  snackController
-                                                      .snackProtein.value) /
-                                              (breakfastController
-                                                      .breakfastKarbo.value +
-                                                  lunchController
-                                                      .lunchKarbo.value +
-                                                  dinnerController
-                                                      .dinnerKarbo.value +
-                                                  snackController
-                                                      .snackKarbo.value +
-                                                  breakfastController
-                                                      .breakfastProtein.value +
-                                                  lunchController
-                                                      .lunchProtein.value +
-                                                  dinnerController
-                                                      .dinnerProtein.value +
-                                                  snackController
-                                                      .snackProtein.value +
-                                                  breakfastController
-                                                      .breakfastLemak.value +
-                                                  lunchController
-                                                      .lunchLemak.value +
-                                                  dinnerController
-                                                      .dinnerLemak.value +
-                                                  snackController
-                                                      .snackLemak.value +
-                                                  1)) *
-                                          100),
-                                    ),
-                                    ChartData(
-                                      'Lemak',
-                                      (((breakfastController.breakfastLemak.value +
-                                                  lunchController
-                                                      .lunchLemak.value +
-                                                  dinnerController
-                                                      .dinnerLemak.value +
-                                                  snackController
-                                                      .snackLemak.value) /
-                                              (breakfastController
-                                                      .breakfastKarbo.value +
-                                                  lunchController
-                                                      .lunchKarbo.value +
-                                                  dinnerController
-                                                      .dinnerKarbo.value +
-                                                  snackController
-                                                      .snackKarbo.value +
-                                                  breakfastController
-                                                      .breakfastProtein.value +
-                                                  lunchController
-                                                      .lunchProtein.value +
-                                                  dinnerController
-                                                      .dinnerProtein.value +
-                                                  snackController
-                                                      .snackProtein.value +
-                                                  breakfastController
-                                                      .breakfastLemak.value +
-                                                  lunchController
-                                                      .lunchLemak.value +
-                                                  dinnerController
-                                                      .dinnerLemak.value +
-                                                  snackController
-                                                      .snackLemak.value +
-                                                  1)) *
-                                          100),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: whiteColor),
-                      padding: EdgeInsets.all(20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Makronutrisi hari yg lalu",
-                            style: blackTextStyle.copyWith(
-                                fontSize: 16, fontWeight: semiBold),
-                          ),
-                          Obx(
-                            () => Row(
-                              children: [
-                                makronutrisi(
-                                  context,
-                                  palletChart,
-                                  [
-                                    ChartData(
-                                      'Karbohidrat',
-                                      (((dailyDietController.breakfastKarbo.value +
-                                                  dailyDietController
-                                                      .lunchKarbo.value +
-                                                  dailyDietController
-                                                      .dinnerKarbo.value +
-                                                  dailyDietController
-                                                      .snackKarbo.value) /
-                                              (dailyDietController.breakfastKarbo.value +
-                                                  dailyDietController
-                                                      .lunchKarbo.value +
-                                                  dailyDietController
-                                                      .dinnerKarbo.value +
-                                                  dailyDietController
-                                                      .snackKarbo.value +
-                                                  dailyDietController
-                                                      .breakfastProtein.value +
-                                                  dailyDietController
-                                                      .lunchProtein.value +
-                                                  dailyDietController
-                                                      .dinnerProtein.value +
-                                                  dailyDietController
-                                                      .snackProtein.value +
-                                                  dailyDietController
-                                                      .breakfastLemak.value +
-                                                  dailyDietController
-                                                      .lunchLemak.value +
-                                                  dailyDietController
-                                                      .dinnerLemak.value +
-                                                  dailyDietController
-                                                      .snackLemak.value +
-                                                  1)) *
-                                          100),
-                                    ),
-                                    ChartData(
-                                      'Protein',
-                                      (((dailyDietController.breakfastProtein.value +
-                                                  dailyDietController
-                                                      .lunchProtein.value +
-                                                  dailyDietController
-                                                      .dinnerProtein.value +
-                                                  dailyDietController
-                                                      .snackProtein.value) /
-                                              (dailyDietController.breakfastKarbo.value +
-                                                  dailyDietController
-                                                      .lunchKarbo.value +
-                                                  dailyDietController
-                                                      .dinnerKarbo.value +
-                                                  dailyDietController
-                                                      .snackKarbo.value +
-                                                  dailyDietController
-                                                      .breakfastProtein.value +
-                                                  dailyDietController
-                                                      .lunchProtein.value +
-                                                  dailyDietController
-                                                      .dinnerProtein.value +
-                                                  dailyDietController
-                                                      .snackProtein.value +
-                                                  dailyDietController
-                                                      .breakfastLemak.value +
-                                                  dailyDietController
-                                                      .lunchLemak.value +
-                                                  dailyDietController
-                                                      .dinnerLemak.value +
-                                                  dailyDietController
-                                                      .snackLemak.value +
-                                                  1)) *
-                                          100),
-                                    ),
-                                    ChartData(
-                                      'Lemak',
-                                      (((dailyDietController.breakfastLemak.value +
-                                                  dailyDietController
-                                                      .lunchLemak.value +
-                                                  dailyDietController
-                                                      .dinnerLemak.value +
-                                                  dailyDietController
-                                                      .snackLemak.value) /
-                                              (dailyDietController.breakfastKarbo.value +
-                                                  dailyDietController
-                                                      .lunchKarbo.value +
-                                                  dailyDietController
-                                                      .dinnerKarbo.value +
-                                                  dailyDietController
-                                                      .snackKarbo.value +
-                                                  dailyDietController
-                                                      .breakfastProtein.value +
-                                                  dailyDietController
-                                                      .lunchProtein.value +
-                                                  dailyDietController
-                                                      .dinnerProtein.value +
-                                                  dailyDietController
-                                                      .snackProtein.value +
-                                                  dailyDietController
-                                                      .breakfastLemak.value +
-                                                  dailyDietController
-                                                      .lunchLemak.value +
-                                                  dailyDietController
-                                                      .dinnerLemak.value +
-                                                  dailyDietController
-                                                      .snackLemak.value +
-                                                  1)) *
-                                          100),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-              Obx(() => dailyDietController.isToday.value
-                  ? Container(
-                      width: double.infinity,
-                      height: 207,
-                      margin: const EdgeInsets.only(
-                        top: 24,
-                      ),
-                      padding: EdgeInsets.all(22),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        color: whiteColor,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Nutrisi',
-                            style: blackTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: semiBold,
-                            ),
-                          ),
-                          Obx(
-                            () => Row(
-                              children: [
-                                chartNutrisi(
-                                  context,
-                                  [
-                                    (breakfastController.breakfastKarbo.value +
-                                                lunchController
-                                                    .lunchKarbo.value +
-                                                dinnerController
-                                                    .dinnerKarbo.value +
-                                                snackController
-                                                    .snackKarbo.value) <
-                                            targetController.karbo.value
-                                        ? ChartData(
-                                            'Karbohidrat1',
-                                            (((breakfastController
-                                                            .breakfastKarbo
-                                                            .value +
-                                                        lunchController
-                                                            .lunchKarbo.value +
-                                                        dinnerController
-                                                            .dinnerKarbo.value +
-                                                        snackController
-                                                            .snackKarbo.value) /
-                                                    targetController
-                                                        .karbo.value) *
-                                                100))
-                                        : ChartData(
-                                            'Karbohidrat1',
-                                            100,
-                                          ),
-                                    (breakfastController.breakfastKarbo.value +
-                                                lunchController
-                                                    .lunchKarbo.value +
-                                                dinnerController
-                                                    .dinnerKarbo.value +
-                                                snackController
-                                                    .snackKarbo.value) <
-                                            targetController.karbo.value
-                                        ? ChartData(
-                                            'Karbohidrat2',
-                                            (100 -
-                                                ((breakfastController.breakfastKarbo.value +
-                                                            lunchController
-                                                                .lunchKarbo
-                                                                .value +
-                                                            dinnerController
-                                                                .dinnerKarbo
-                                                                .value +
-                                                            snackController
-                                                                .snackKarbo
-                                                                .value) /
-                                                        targetController
-                                                            .karbo.value) *
-                                                    100))
-                                        : ChartData('Karbohidrat2', 0)
-                                  ],
-                                  "${breakfastController.breakfastKarbo.value + lunchController.lunchKarbo.value + dinnerController.dinnerKarbo.value + snackController.snackKarbo.value}",
-                                  "/ ${targetController.karbo.value} g",
-                                  "Karbohidrat",
-                                ),
-                                chartNutrisi(
-                                  context,
-                                  [
-                                    (breakfastController
-                                                    .breakfastProtein.value +
-                                                lunchController
-                                                    .lunchProtein.value +
-                                                dinnerController
-                                                    .dinnerProtein.value +
-                                                snackController
-                                                    .snackProtein.value) <
-                                            targetController.protein.value
-                                        ? ChartData(
-                                            'Protein',
-                                            (((breakfastController
-                                                            .breakfastProtein.value +
-                                                        lunchController
-                                                            .lunchProtein
-                                                            .value +
-                                                        dinnerController
-                                                            .dinnerProtein
-                                                            .value +
-                                                        snackController
-                                                            .snackProtein
-                                                            .value) /
-                                                    targetController
-                                                        .protein.value) *
-                                                100))
-                                        : ChartData(
-                                            'Protein',
-                                            100,
-                                          ),
-                                    (breakfastController
-                                                    .breakfastProtein.value +
-                                                lunchController
-                                                    .lunchProtein.value +
-                                                dinnerController
-                                                    .dinnerProtein.value +
-                                                snackController
-                                                    .snackProtein.value) <
-                                            targetController.protein.value
-                                        ? ChartData(
-                                            'Protein2',
-                                            (100 -
-                                                ((breakfastController
-                                                                .breakfastProtein.value +
-                                                            lunchController
-                                                                .lunchProtein
-                                                                .value +
-                                                            dinnerController
-                                                                .dinnerProtein
-                                                                .value +
-                                                            snackController
-                                                                .snackProtein
-                                                                .value) /
-                                                        targetController
-                                                            .protein.value) *
-                                                    100))
-                                        : ChartData('Protein2', 0),
-                                  ],
-                                  "${breakfastController.breakfastProtein.value + lunchController.lunchProtein.value + dinnerController.dinnerProtein.value + snackController.snackProtein.value}",
-                                  "/ ${targetController.protein.value} g",
-                                  "Protein",
-                                ),
-                                chartNutrisi(
-                                  context,
-                                  [
-                                    (breakfastController.breakfastLemak.value +
-                                                lunchController
-                                                    .lunchLemak.value +
-                                                dinnerController
-                                                    .dinnerLemak.value +
-                                                snackController
-                                                    .snackLemak.value) <
-                                            targetController.lemak.value
-                                        ? ChartData(
-                                            'Lemak',
-                                            (((breakfastController
-                                                            .breakfastLemak
-                                                            .value +
-                                                        lunchController
-                                                            .lunchLemak.value +
-                                                        dinnerController
-                                                            .dinnerLemak.value +
-                                                        snackController
-                                                            .snackLemak.value) /
-                                                    targetController
-                                                        .lemak.value) *
-                                                100))
-                                        : ChartData('Lemak', 100),
-                                    (breakfastController.breakfastLemak.value +
-                                                lunchController
-                                                    .lunchLemak.value +
-                                                dinnerController
-                                                    .dinnerLemak.value +
-                                                snackController
-                                                    .snackLemak.value) <
-                                            targetController.lemak.value
-                                        ? ChartData(
-                                            'Lemak2',
-                                            (100 -
-                                                ((breakfastController.breakfastLemak.value +
-                                                            lunchController
-                                                                .lunchLemak
-                                                                .value +
-                                                            dinnerController
-                                                                .dinnerLemak
-                                                                .value +
-                                                            snackController
-                                                                .snackLemak
-                                                                .value) /
-                                                        targetController
-                                                            .lemak.value) *
-                                                    100))
-                                        : ChartData(
-                                            'Lemak2',
-                                            0,
-                                          ),
-                                  ],
-                                  "${breakfastController.breakfastLemak.value + lunchController.lunchLemak.value + dinnerController.dinnerLemak.value + snackController.snackLemak.value}",
-                                  "/ ${targetController.lemak.value} g",
-                                  "Lemak",
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : Container(
-                      width: double.infinity,
-                      height: 207,
-                      margin: const EdgeInsets.only(
-                        top: 24,
-                      ),
-                      padding: EdgeInsets.all(22),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        color: whiteColor,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Nutrisi hari yg lalu',
-                            style: blackTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: semiBold,
-                            ),
-                          ),
-                          Obx(
-                            () => Row(
-                              children: [
-                                chartNutrisi(
-                                  context,
-                                  [
-                                    (dailyDietController.breakfastKarbo.value +
-                                                dailyDietController
-                                                    .lunchKarbo.value +
-                                                dailyDietController
-                                                    .dinnerKarbo.value +
-                                                dailyDietController
-                                                    .snackKarbo.value) <
-                                            targetController.karbo.value
-                                        ? ChartData(
-                                            'Karbohidrat1',
-                                            (((dailyDietController
-                                                            .breakfastKarbo.value +
-                                                        dailyDietController
-                                                            .lunchKarbo.value +
-                                                        dailyDietController
-                                                            .dinnerKarbo.value +
-                                                        dailyDietController
-                                                            .snackKarbo.value) /
-                                                    targetController
-                                                        .karbo.value) *
-                                                100))
-                                        : ChartData(
-                                            'Karbohidrat1',
-                                            100,
-                                          ),
-                                    (dailyDietController.breakfastKarbo.value +
-                                                dailyDietController
-                                                    .lunchKarbo.value +
-                                                dailyDietController
-                                                    .dinnerKarbo.value +
-                                                dailyDietController
-                                                    .snackKarbo.value) <
-                                            targetController.karbo.value
-                                        ? ChartData(
-                                            'Karbohidrat2',
-                                            (100 -
-                                                ((dailyDietController
-                                                                .breakfastKarbo.value +
-                                                            dailyDietController
-                                                                .lunchKarbo.value +
-                                                            dailyDietController
-                                                                .dinnerKarbo
-                                                                .value +
-                                                            dailyDietController
-                                                                .snackKarbo
-                                                                .value) /
-                                                        targetController
-                                                            .karbo.value) *
-                                                    100))
-                                        : ChartData(
-                                            'Karbohidrat1',
-                                            0,
-                                          ),
-                                  ],
-                                  "${dailyDietController.breakfastKarbo.value + dailyDietController.lunchKarbo.value + dailyDietController.dinnerKarbo.value + dailyDietController.snackKarbo.value}",
-                                  "/ ${targetController.karbo.value} g",
-                                  "Karbohidrat",
-                                ),
-                                chartNutrisi(
-                                  context,
-                                  [
-                                    (dailyDietController.breakfastProtein.value +
-                                                dailyDietController
-                                                    .lunchProtein.value +
-                                                dailyDietController
-                                                    .dinnerProtein.value +
-                                                dailyDietController
-                                                    .snackProtein.value) <
-                                            targetController.protein.value
-                                        ? ChartData(
-                                            'Protein',
-                                            (((dailyDietController
-                                                            .breakfastProtein
-                                                            .value +
-                                                        dailyDietController
-                                                            .lunchProtein
-                                                            .value +
-                                                        dailyDietController
-                                                            .dinnerProtein
-                                                            .value +
-                                                        dailyDietController
-                                                            .snackProtein
-                                                            .value) /
-                                                    targetController
-                                                        .protein.value) *
-                                                100))
-                                        : ChartData(
-                                            'Protein',
-                                            100,
-                                          ),
-                                    (dailyDietController.breakfastProtein.value +
-                                                dailyDietController
-                                                    .lunchProtein.value +
-                                                dailyDietController
-                                                    .dinnerProtein.value +
-                                                dailyDietController
-                                                    .snackProtein.value) <
-                                            targetController.protein.value
-                                        ? ChartData(
-                                            'Protein2',
-                                            (100 -
-                                                ((dailyDietController
-                                                                .breakfastProtein
-                                                                .value +
-                                                            dailyDietController
-                                                                .lunchProtein
-                                                                .value +
-                                                            dailyDietController
-                                                                .dinnerProtein
-                                                                .value +
-                                                            dailyDietController
-                                                                .snackProtein
-                                                                .value) /
-                                                        targetController
-                                                            .protein.value) *
-                                                    100))
-                                        : ChartData('Protein2', 0),
-                                  ],
-                                  "${dailyDietController.breakfastProtein.value + dailyDietController.lunchProtein.value + dailyDietController.dinnerProtein.value + dailyDietController.snackProtein.value}",
-                                  "/ ${targetController.protein.value} g",
-                                  "Protein",
-                                ),
-                                chartNutrisi(
-                                  context,
-                                  [
-                                    (dailyDietController.breakfastLemak.value +
-                                                dailyDietController
-                                                    .lunchLemak.value +
-                                                dailyDietController
-                                                    .dinnerLemak.value +
-                                                dailyDietController
-                                                    .snackLemak.value) <
-                                            targetController.lemak.value
-                                        ? ChartData(
-                                            'Lemak',
-                                            (((dailyDietController
-                                                            .breakfastLemak.value +
-                                                        dailyDietController
-                                                            .lunchLemak.value +
-                                                        dailyDietController
-                                                            .dinnerLemak.value +
-                                                        dailyDietController
-                                                            .snackLemak.value) /
-                                                    targetController
-                                                        .lemak.value) *
-                                                100))
-                                        : ChartData(
-                                            'Lemak',
-                                            100,
-                                          ),
-                                    (dailyDietController.breakfastLemak.value +
-                                                dailyDietController
-                                                    .lunchLemak.value +
-                                                dailyDietController
-                                                    .dinnerLemak.value +
-                                                dailyDietController
-                                                    .snackLemak.value) <
-                                            targetController.lemak.value
-                                        ? ChartData(
-                                            'Lemak2',
-                                            (100 -
-                                                ((dailyDietController
-                                                                .breakfastLemak.value +
-                                                            dailyDietController
-                                                                .lunchLemak.value +
-                                                            dailyDietController
-                                                                .dinnerLemak
-                                                                .value +
-                                                            dailyDietController
-                                                                .snackLemak
-                                                                .value) /
-                                                        targetController
-                                                            .lemak.value) *
-                                                    100))
-                                        : ChartData('Lemak2', 0),
-                                  ],
-                                  "${dailyDietController.breakfastLemak.value + dailyDietController.lunchLemak.value + dailyDietController.dinnerLemak.value + dailyDietController.snackLemak.value}",
-                                  "/ ${targetController.lemak.value} g",
-                                  "Lemak",
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-              const SizedBox(height: 30),
               Obx(
                 () => dailyDietController.isToday.value
                     ? Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: whiteColor),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Makronutrisi",
+                              style: blackTextStyle.copyWith(
+                                  fontSize: 16, fontWeight: semiBold),
+                            ),
+                            Obx(
+                              () => Row(
+                                children: [
+                                  makronutrisi(
+                                    context,
+                                    palletChart,
+                                    [
+                                      ChartData(
+                                        'Karbohidrat',
+                                        (((breakfastController.breakfastKarbo.value +
+                                                    lunchController
+                                                        .lunchKarbo.value +
+                                                    dinnerController
+                                                        .dinnerKarbo.value +
+                                                    snackController
+                                                        .snackKarbo.value) /
+                                                (breakfastController
+                                                        .breakfastKarbo.value +
+                                                    lunchController
+                                                        .lunchKarbo.value +
+                                                    dinnerController
+                                                        .dinnerKarbo.value +
+                                                    snackController
+                                                        .snackKarbo.value +
+                                                    breakfastController
+                                                        .breakfastProtein
+                                                        .value +
+                                                    lunchController
+                                                        .lunchProtein.value +
+                                                    dinnerController.dinnerProtein
+                                                        .value +
+                                                    snackController
+                                                        .snackProtein.value +
+                                                    breakfastController
+                                                        .breakfastLemak.value +
+                                                    lunchController
+                                                        .lunchLemak.value +
+                                                    dinnerController
+                                                        .dinnerLemak.value +
+                                                    snackController
+                                                        .snackLemak.value +
+                                                    1)) *
+                                            100),
+                                      ),
+                                      ChartData(
+                                        'Protein',
+                                        (((breakfastController.breakfastProtein.value +
+                                                    lunchController
+                                                        .lunchProtein.value +
+                                                    dinnerController
+                                                        .dinnerProtein.value +
+                                                    snackController
+                                                        .snackProtein.value) /
+                                                (breakfastController
+                                                        .breakfastKarbo.value +
+                                                    lunchController
+                                                        .lunchKarbo.value +
+                                                    dinnerController
+                                                        .dinnerKarbo.value +
+                                                    snackController
+                                                        .snackKarbo.value +
+                                                    breakfastController
+                                                        .breakfastProtein
+                                                        .value +
+                                                    lunchController
+                                                        .lunchProtein.value +
+                                                    dinnerController.dinnerProtein
+                                                        .value +
+                                                    snackController
+                                                        .snackProtein.value +
+                                                    breakfastController
+                                                        .breakfastLemak.value +
+                                                    lunchController
+                                                        .lunchLemak.value +
+                                                    dinnerController
+                                                        .dinnerLemak.value +
+                                                    snackController
+                                                        .snackLemak.value +
+                                                    1)) *
+                                            100),
+                                      ),
+                                      ChartData(
+                                        'Lemak',
+                                        (((breakfastController.breakfastLemak.value +
+                                                    lunchController
+                                                        .lunchLemak.value +
+                                                    dinnerController
+                                                        .dinnerLemak.value +
+                                                    snackController
+                                                        .snackLemak.value) /
+                                                (breakfastController
+                                                        .breakfastKarbo.value +
+                                                    lunchController
+                                                        .lunchKarbo.value +
+                                                    dinnerController
+                                                        .dinnerKarbo.value +
+                                                    snackController
+                                                        .snackKarbo.value +
+                                                    breakfastController
+                                                        .breakfastProtein
+                                                        .value +
+                                                    lunchController
+                                                        .lunchProtein.value +
+                                                    dinnerController.dinnerProtein
+                                                        .value +
+                                                    snackController
+                                                        .snackProtein.value +
+                                                    breakfastController
+                                                        .breakfastLemak.value +
+                                                    lunchController
+                                                        .lunchLemak.value +
+                                                    dinnerController
+                                                        .dinnerLemak.value +
+                                                    snackController
+                                                        .snackLemak.value +
+                                                    1)) *
+                                            100),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: whiteColor),
+                        padding: EdgeInsets.all(20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Makronutrisi",
+                              style: blackTextStyle.copyWith(
+                                  fontSize: 16, fontWeight: semiBold),
+                            ),
+                            Obx(
+                              () => Row(
+                                children: [
+                                  makronutrisi(
+                                    context,
+                                    palletChart,
+                                    [
+                                      ChartData(
+                                        'Karbohidrat',
+                                        (((dailyDietController.breakfastKarbo.value +
+                                                    dailyDietController
+                                                        .lunchKarbo.value +
+                                                    dailyDietController
+                                                        .dinnerKarbo.value +
+                                                    dailyDietController
+                                                        .snackKarbo.value) /
+                                                (dailyDietController.breakfastKarbo.value +
+                                                    dailyDietController
+                                                        .lunchKarbo.value +
+                                                    dailyDietController
+                                                        .dinnerKarbo.value +
+                                                    dailyDietController
+                                                        .snackKarbo.value +
+                                                    dailyDietController
+                                                        .breakfastProtein
+                                                        .value +
+                                                    dailyDietController
+                                                        .lunchProtein.value +
+                                                    dailyDietController
+                                                        .dinnerProtein.value +
+                                                    dailyDietController
+                                                        .snackProtein.value +
+                                                    dailyDietController
+                                                        .breakfastLemak.value +
+                                                    dailyDietController
+                                                        .lunchLemak.value +
+                                                    dailyDietController
+                                                        .dinnerLemak.value +
+                                                    dailyDietController
+                                                        .snackLemak.value +
+                                                    1)) *
+                                            100),
+                                      ),
+                                      ChartData(
+                                        'Protein',
+                                        (((dailyDietController.breakfastProtein.value +
+                                                    dailyDietController
+                                                        .lunchProtein.value +
+                                                    dailyDietController
+                                                        .dinnerProtein.value +
+                                                    dailyDietController
+                                                        .snackProtein.value) /
+                                                (dailyDietController.breakfastKarbo.value +
+                                                    dailyDietController
+                                                        .lunchKarbo.value +
+                                                    dailyDietController
+                                                        .dinnerKarbo.value +
+                                                    dailyDietController
+                                                        .snackKarbo.value +
+                                                    dailyDietController
+                                                        .breakfastProtein
+                                                        .value +
+                                                    dailyDietController
+                                                        .lunchProtein.value +
+                                                    dailyDietController
+                                                        .dinnerProtein.value +
+                                                    dailyDietController
+                                                        .snackProtein.value +
+                                                    dailyDietController
+                                                        .breakfastLemak.value +
+                                                    dailyDietController
+                                                        .lunchLemak.value +
+                                                    dailyDietController
+                                                        .dinnerLemak.value +
+                                                    dailyDietController
+                                                        .snackLemak.value +
+                                                    1)) *
+                                            100),
+                                      ),
+                                      ChartData(
+                                        'Lemak',
+                                        (((dailyDietController.breakfastLemak.value +
+                                                    dailyDietController
+                                                        .lunchLemak.value +
+                                                    dailyDietController
+                                                        .dinnerLemak.value +
+                                                    dailyDietController
+                                                        .snackLemak.value) /
+                                                (dailyDietController.breakfastKarbo.value +
+                                                    dailyDietController
+                                                        .lunchKarbo.value +
+                                                    dailyDietController
+                                                        .dinnerKarbo.value +
+                                                    dailyDietController
+                                                        .snackKarbo.value +
+                                                    dailyDietController
+                                                        .breakfastProtein
+                                                        .value +
+                                                    dailyDietController
+                                                        .lunchProtein.value +
+                                                    dailyDietController
+                                                        .dinnerProtein.value +
+                                                    dailyDietController
+                                                        .snackProtein.value +
+                                                    dailyDietController
+                                                        .breakfastLemak.value +
+                                                    dailyDietController
+                                                        .lunchLemak.value +
+                                                    dailyDietController
+                                                        .dinnerLemak.value +
+                                                    dailyDietController
+                                                        .snackLemak.value +
+                                                    1)) *
+                                            100),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+              ),
+              Obx(
+                () => dailyDietController.isToday.value
+                    ? Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 207,
+                        margin: const EdgeInsets.only(
+                          top: 24,
+                        ),
+                        padding: EdgeInsets.all(22),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          color: whiteColor,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Nutrisi',
+                              style: blackTextStyle.copyWith(
+                                fontSize: 16,
+                                fontWeight: semiBold,
+                              ),
+                            ),
+                            Obx(
+                              () => Row(
+                                children: [
+                                  chartNutrisi(
+                                    context,
+                                    [
+                                      (breakfastController
+                                                      .breakfastKarbo.value +
+                                                  lunchController
+                                                      .lunchKarbo.value +
+                                                  dinnerController
+                                                      .dinnerKarbo.value +
+                                                  snackController
+                                                      .snackKarbo.value) <
+                                              targetController.karbo.value
+                                          ? ChartData(
+                                              'Karbohidrat1',
+                                              (((breakfastController
+                                                              .breakfastKarbo.value +
+                                                          lunchController
+                                                              .lunchKarbo
+                                                              .value +
+                                                          dinnerController
+                                                              .dinnerKarbo
+                                                              .value +
+                                                          snackController
+                                                              .snackKarbo
+                                                              .value) /
+                                                      targetController
+                                                          .karbo.value) *
+                                                  100))
+                                          : ChartData(
+                                              'Karbohidrat1',
+                                              100,
+                                            ),
+                                      (breakfastController
+                                                      .breakfastKarbo.value +
+                                                  lunchController
+                                                      .lunchKarbo.value +
+                                                  dinnerController
+                                                      .dinnerKarbo.value +
+                                                  snackController
+                                                      .snackKarbo.value) <
+                                              targetController.karbo.value
+                                          ? ChartData(
+                                              'Karbohidrat2',
+                                              (100 -
+                                                  ((breakfastController
+                                                                  .breakfastKarbo.value +
+                                                              lunchController
+                                                                  .lunchKarbo
+                                                                  .value +
+                                                              dinnerController
+                                                                  .dinnerKarbo
+                                                                  .value +
+                                                              snackController
+                                                                  .snackKarbo
+                                                                  .value) /
+                                                          targetController
+                                                              .karbo.value) *
+                                                      100))
+                                          : ChartData('Karbohidrat2', 0)
+                                    ],
+                                    "${breakfastController.breakfastKarbo.value + lunchController.lunchKarbo.value + dinnerController.dinnerKarbo.value + snackController.snackKarbo.value}",
+                                    "/ ${targetController.karbo.value} g",
+                                    "Karbohidrat",
+                                  ),
+                                  chartNutrisi(
+                                    context,
+                                    [
+                                      (breakfastController.breakfastProtein.value +
+                                                  lunchController
+                                                      .lunchProtein.value +
+                                                  dinnerController
+                                                      .dinnerProtein.value +
+                                                  snackController
+                                                      .snackProtein.value) <
+                                              targetController.protein.value
+                                          ? ChartData(
+                                              'Protein',
+                                              (((breakfastController
+                                                              .breakfastProtein
+                                                              .value +
+                                                          lunchController.lunchProtein
+                                                              .value +
+                                                          dinnerController
+                                                              .dinnerProtein
+                                                              .value +
+                                                          snackController
+                                                              .snackProtein
+                                                              .value) /
+                                                      targetController
+                                                          .protein.value) *
+                                                  100))
+                                          : ChartData(
+                                              'Protein',
+                                              100,
+                                            ),
+                                      (breakfastController.breakfastProtein.value +
+                                                  lunchController
+                                                      .lunchProtein.value +
+                                                  dinnerController
+                                                      .dinnerProtein.value +
+                                                  snackController
+                                                      .snackProtein.value) <
+                                              targetController.protein.value
+                                          ? ChartData(
+                                              'Protein2',
+                                              (100 -
+                                                  ((breakfastController
+                                                                  .breakfastProtein
+                                                                  .value +
+                                                              lunchController
+                                                                  .lunchProtein.value +
+                                                              dinnerController
+                                                                  .dinnerProtein
+                                                                  .value +
+                                                              snackController
+                                                                  .snackProtein
+                                                                  .value) /
+                                                          targetController
+                                                              .protein.value) *
+                                                      100))
+                                          : ChartData('Protein2', 0),
+                                    ],
+                                    "${breakfastController.breakfastProtein.value + lunchController.lunchProtein.value + dinnerController.dinnerProtein.value + snackController.snackProtein.value}",
+                                    "/ ${targetController.protein.value} g",
+                                    "Protein",
+                                  ),
+                                  chartNutrisi(
+                                    context,
+                                    [
+                                      (breakfastController
+                                                      .breakfastLemak.value +
+                                                  lunchController
+                                                      .lunchLemak.value +
+                                                  dinnerController
+                                                      .dinnerLemak.value +
+                                                  snackController
+                                                      .snackLemak.value) <
+                                              targetController.lemak.value
+                                          ? ChartData(
+                                              'Lemak',
+                                              (((breakfastController
+                                                              .breakfastLemak.value +
+                                                          lunchController
+                                                              .lunchLemak
+                                                              .value +
+                                                          dinnerController
+                                                              .dinnerLemak
+                                                              .value +
+                                                          snackController
+                                                              .snackLemak
+                                                              .value) /
+                                                      targetController
+                                                          .lemak.value) *
+                                                  100))
+                                          : ChartData('Lemak', 100),
+                                      (breakfastController
+                                                      .breakfastLemak.value +
+                                                  lunchController
+                                                      .lunchLemak.value +
+                                                  dinnerController
+                                                      .dinnerLemak.value +
+                                                  snackController
+                                                      .snackLemak.value) <
+                                              targetController.lemak.value
+                                          ? ChartData(
+                                              'Lemak2',
+                                              (100 -
+                                                  ((breakfastController
+                                                                  .breakfastLemak.value +
+                                                              lunchController
+                                                                  .lunchLemak
+                                                                  .value +
+                                                              dinnerController
+                                                                  .dinnerLemak
+                                                                  .value +
+                                                              snackController
+                                                                  .snackLemak
+                                                                  .value) /
+                                                          targetController
+                                                              .lemak.value) *
+                                                      100))
+                                          : ChartData(
+                                              'Lemak2',
+                                              0,
+                                            ),
+                                    ],
+                                    "${breakfastController.breakfastLemak.value + lunchController.lunchLemak.value + dinnerController.dinnerLemak.value + snackController.snackLemak.value}",
+                                    "/ ${targetController.lemak.value} g",
+                                    "Lemak",
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 207,
+                        margin: const EdgeInsets.only(
+                          top: 24,
+                        ),
+                        padding: EdgeInsets.all(22),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          color: whiteColor,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Nutrisi',
+                              style: blackTextStyle.copyWith(
+                                fontSize: 16,
+                                fontWeight: semiBold,
+                              ),
+                            ),
+                            Obx(
+                              () => Row(
+                                children: [
+                                  chartNutrisi(
+                                    context,
+                                    [
+                                      (dailyDietController.breakfastKarbo.value +
+                                                  dailyDietController
+                                                      .lunchKarbo.value +
+                                                  dailyDietController
+                                                      .dinnerKarbo.value +
+                                                  dailyDietController
+                                                      .snackKarbo.value) <
+                                              targetController.karbo.value
+                                          ? ChartData(
+                                              'Karbohidrat1',
+                                              (((dailyDietController
+                                                              .breakfastKarbo
+                                                              .value +
+                                                          dailyDietController
+                                                              .lunchKarbo
+                                                              .value +
+                                                          dailyDietController
+                                                              .dinnerKarbo
+                                                              .value +
+                                                          dailyDietController
+                                                              .snackKarbo
+                                                              .value) /
+                                                      targetController
+                                                          .karbo.value) *
+                                                  100))
+                                          : ChartData(
+                                              'Karbohidrat1',
+                                              100,
+                                            ),
+                                      (dailyDietController.breakfastKarbo.value +
+                                                  dailyDietController
+                                                      .lunchKarbo.value +
+                                                  dailyDietController
+                                                      .dinnerKarbo.value +
+                                                  dailyDietController
+                                                      .snackKarbo.value) <
+                                              targetController.karbo.value
+                                          ? ChartData(
+                                              'Karbohidrat2',
+                                              (100 -
+                                                  ((dailyDietController
+                                                                  .breakfastKarbo
+                                                                  .value +
+                                                              dailyDietController
+                                                                  .lunchKarbo
+                                                                  .value +
+                                                              dailyDietController
+                                                                  .dinnerKarbo
+                                                                  .value +
+                                                              dailyDietController
+                                                                  .snackKarbo
+                                                                  .value) /
+                                                          targetController
+                                                              .karbo.value) *
+                                                      100))
+                                          : ChartData(
+                                              'Karbohidrat1',
+                                              0,
+                                            ),
+                                    ],
+                                    "${dailyDietController.breakfastKarbo.value + dailyDietController.lunchKarbo.value + dailyDietController.dinnerKarbo.value + dailyDietController.snackKarbo.value}",
+                                    "/ ${targetController.karbo.value} g",
+                                    "Karbohidrat",
+                                  ),
+                                  chartNutrisi(
+                                    context,
+                                    [
+                                      (dailyDietController.breakfastProtein.value +
+                                                  dailyDietController
+                                                      .lunchProtein.value +
+                                                  dailyDietController
+                                                      .dinnerProtein.value +
+                                                  dailyDietController
+                                                      .snackProtein.value) <
+                                              targetController.protein.value
+                                          ? ChartData(
+                                              'Protein',
+                                              (((dailyDietController
+                                                              .breakfastProtein
+                                                              .value +
+                                                          dailyDietController
+                                                              .lunchProtein
+                                                              .value +
+                                                          dailyDietController
+                                                              .dinnerProtein
+                                                              .value +
+                                                          dailyDietController
+                                                              .snackProtein
+                                                              .value) /
+                                                      targetController
+                                                          .protein.value) *
+                                                  100))
+                                          : ChartData(
+                                              'Protein',
+                                              100,
+                                            ),
+                                      (dailyDietController.breakfastProtein.value +
+                                                  dailyDietController
+                                                      .lunchProtein.value +
+                                                  dailyDietController
+                                                      .dinnerProtein.value +
+                                                  dailyDietController
+                                                      .snackProtein.value) <
+                                              targetController.protein.value
+                                          ? ChartData(
+                                              'Protein2',
+                                              (100 -
+                                                  ((dailyDietController
+                                                                  .breakfastProtein
+                                                                  .value +
+                                                              dailyDietController
+                                                                  .lunchProtein
+                                                                  .value +
+                                                              dailyDietController
+                                                                  .dinnerProtein
+                                                                  .value +
+                                                              dailyDietController
+                                                                  .snackProtein
+                                                                  .value) /
+                                                          targetController
+                                                              .protein.value) *
+                                                      100))
+                                          : ChartData('Protein2', 0),
+                                    ],
+                                    "${dailyDietController.breakfastProtein.value + dailyDietController.lunchProtein.value + dailyDietController.dinnerProtein.value + dailyDietController.snackProtein.value}",
+                                    "/ ${targetController.protein.value} g",
+                                    "Protein",
+                                  ),
+                                  chartNutrisi(
+                                    context,
+                                    [
+                                      (dailyDietController.breakfastLemak.value +
+                                                  dailyDietController
+                                                      .lunchLemak.value +
+                                                  dailyDietController
+                                                      .dinnerLemak.value +
+                                                  dailyDietController
+                                                      .snackLemak.value) <
+                                              targetController.lemak.value
+                                          ? ChartData(
+                                              'Lemak',
+                                              (((dailyDietController
+                                                              .breakfastLemak
+                                                              .value +
+                                                          dailyDietController
+                                                              .lunchLemak
+                                                              .value +
+                                                          dailyDietController
+                                                              .dinnerLemak
+                                                              .value +
+                                                          dailyDietController
+                                                              .snackLemak
+                                                              .value) /
+                                                      targetController
+                                                          .lemak.value) *
+                                                  100))
+                                          : ChartData(
+                                              'Lemak',
+                                              100,
+                                            ),
+                                      (dailyDietController.breakfastLemak.value +
+                                                  dailyDietController
+                                                      .lunchLemak.value +
+                                                  dailyDietController
+                                                      .dinnerLemak.value +
+                                                  dailyDietController
+                                                      .snackLemak.value) <
+                                              targetController.lemak.value
+                                          ? ChartData(
+                                              'Lemak2',
+                                              (100 -
+                                                  ((dailyDietController
+                                                                  .breakfastLemak
+                                                                  .value +
+                                                              dailyDietController
+                                                                  .lunchLemak
+                                                                  .value +
+                                                              dailyDietController
+                                                                  .dinnerLemak
+                                                                  .value +
+                                                              dailyDietController
+                                                                  .snackLemak
+                                                                  .value) /
+                                                          targetController
+                                                              .lemak.value) *
+                                                      100))
+                                          : ChartData('Lemak2', 0),
+                                    ],
+                                    "${dailyDietController.breakfastLemak.value + dailyDietController.lunchLemak.value + dailyDietController.dinnerLemak.value + dailyDietController.snackLemak.value}",
+                                    "/ ${targetController.lemak.value} g",
+                                    "Lemak",
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              Obx(
+                () => dailyDietController.isToday.value
+                    ? Container(
+                        width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: whiteColor),
@@ -826,7 +858,7 @@ class _NutrisiPageState extends State<NutrisiPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Kalori hari yang lalu",
+                              "Kalori",
                               style: blackTextStyle.copyWith(
                                   fontSize: 16, fontWeight: semiBold),
                             ),

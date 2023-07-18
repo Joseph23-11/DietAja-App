@@ -123,24 +123,4 @@ class MakananProvider {
   Future delSnacks(int id) async {
     return await _makananRepository.delSnacks(id);
   }
-
-  // Future<JSON> editBreakfast(int id, JSON body) async {
-  //   var response = await _makananRepository.editBreakfast(id, body);
-  //   return response;
-  // }
-
-  // Future<JSON> editLunch(int id, JSON body) async {
-  //   var response = await _makananRepository.editLunch(id, body);
-  //   return response;
-  // }
-
-  // Future<JSON> editDinner(int id, JSON body) async {
-  //   var response = await _makananRepository.editDinner(id, body);
-  //   return response;
-  // }
-
-  // Future<JSON> editSnack(int id, JSON body) async {
-  //   var response = await _makananRepository.editSnack(id, body);
-  //   return response;
-  // }
 }

@@ -176,44 +176,4 @@ class MakananRepository {
 
     return response;
   }
-
-  // Future editBreakfast(int id, JSON body) async {
-  //   final response = await _apiService.put(
-  //     endpoint: '/breakfasts/$id',
-  //     body: body,
-  //     requiresAuthToken: true,
-  //   );
-
-  //   return response;
-  // }
-
-  // Future editLunch(int id, JSON body) async {
-  //   final response = await _apiService.put(
-  //     endpoint: '/lunches/$id',
-  //     body: body,
-  //     requiresAuthToken: true,
-  //   );
-
-  //   return response;
-  // }
-
-  // Future editDinner(int id, JSON body) async {
-  //   final response = await _apiService.put(
-  //     endpoint: '/dinners/$id',
-  //     body: body,
-  //     requiresAuthToken: true,
-  //   );
-
-  //   return response;
-  // }
-
-  // Future editSnack(int id, JSON body) async {
-  //   final response = await _apiService.put(
-  //     endpoint: '/snacks/$id',
-  //     body: body,
-  //     requiresAuthToken: true,
-  //   );
-
-  //   return response;
-  // }
 }

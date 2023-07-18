@@ -85,35 +85,6 @@ class MakananController extends GetxController
     change(listMakanan, status: RxStatus.success());
   }
 
-  // void editPorsi(int id, double porsi, String argumen) async {
-  //   final body = {
-  //     'porsi_makanan': porsi,
-  //   };
-
-  //   try {
-  //     switch (argumen) {
-  //       case 'breakfasts':
-  //         await _makananProvider.editBreakfast(id, body);
-  //         break;
-  //       case 'lunches':
-  //         await _makananProvider.editLunch(id, body);
-  //         break;
-  //       case 'dinners':
-  //         await _makananProvider.editDinner(id, body);
-  //         break;
-  //       case 'snacks':
-  //         await _makananProvider.editSnack(id, body);
-  //         break;
-  //       default:
-  //         break;
-  //     }
-
-  //     Get.back(); // Close the dialog after editing the portion
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
-
   @override
   void onInit() {
     super.onInit();
