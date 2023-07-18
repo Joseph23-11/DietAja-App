@@ -57,6 +57,7 @@ class _NutrisiPageState extends State<NutrisiPage> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: whiteColor),
+                        padding: EdgeInsets.all(20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
