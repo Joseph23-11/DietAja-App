@@ -38,38 +38,54 @@ class ProfilePage extends GetView<UserController> {
               Container(
                 width: 120,
                 height: 120,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  image: DecorationImage(
-                    image: AssetImage(
-                      'assets/img_profile.png',
-                    ),
-                  ),
-                ),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Container(
-                    width: 28,
-                    height: 28,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: whiteColor,
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.check_circle,
-                        color: greenColor,
-                        size: 24,
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: CircleAvatar(
+                        radius: 120,
+                        backgroundColor: Color(0xff7E91FF),
+                        child: Text(
+                          (data?.username?.isNotEmpty == true)
+                              ? (data!.username!.contains(' ')
+                                  ? '${data.username!.split(' ')[0][0].toUpperCase()}${data.username!.split(' ')[1][0].toUpperCase()}'
+                                  : (data.username!.length > 1
+                                      ? '${data.username![0].toUpperCase()}${data.username![data.username!.length - 1].toUpperCase()}'
+                                      : data.username![0].toUpperCase()))
+                              : '',
+                          style: whiteTextStyle.copyWith(
+                            fontSize: 24,
+                            fontWeight: semiBold,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: Container(
+                        width: 28,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: whiteColor,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.check_circle,
+                            color: greenColor,
+                            size: 24,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               const SizedBox(
                 height: 16,
               ),
               Text(
-                data!.username!,
+                data?.username ?? '',
                 style: blackTextStyle.copyWith(
                   fontSize: 18,
                   fontWeight: medium,

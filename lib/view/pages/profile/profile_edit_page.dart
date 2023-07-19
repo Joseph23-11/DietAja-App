@@ -50,7 +50,7 @@ class ProfileEditPage extends GetView<UserController> {
                       }
                       return null;
                     },
-                    focusNode: passwordFocusNode,
+                    focusNode: usernameFocusNode,
                   ),
                   const SizedBox(
                     height: 16,
@@ -65,7 +65,7 @@ class ProfileEditPage extends GetView<UserController> {
                       }
                       return null;
                     },
-                    focusNode: passwordFocusNode,
+                    focusNode: emailFocusNode,
                   ),
                   const SizedBox(
                     height: 16,

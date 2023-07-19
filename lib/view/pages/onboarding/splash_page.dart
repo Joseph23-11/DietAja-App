@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../shared/theme.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -31,9 +31,11 @@ class _SplashPageState extends State<SplashPage> {
       username = prefs.getString('username');
       password = prefs.getString('password');
 
-      if (token!.isNotEmpty) {
-        if ((username != '' && password != '') &&
-            (username != null && password != null)) {
+      if (token != null && token!.isNotEmpty) {
+        if (username != null &&
+            password != null &&
+            username!.isNotEmpty &&
+            password!.isNotEmpty) {
           Timer(const Duration(seconds: 2), () async {
             await controller.postLogin(
               false,
@@ -67,11 +69,12 @@ class _SplashPageState extends State<SplashPage> {
             width: 242,
             height: 50,
             decoration: const BoxDecoration(
-                image: DecorationImage(
-              image: AssetImage(
-                'assets/img_logo_light.png',
+              image: DecorationImage(
+                image: AssetImage(
+                  'assets/img_logo_light.png',
+                ),
               ),
-            )),
+            ),
           ),
         ),
       ),
