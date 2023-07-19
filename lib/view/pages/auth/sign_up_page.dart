@@ -11,9 +11,10 @@ class SignUpPage extends GetView<AuthController> {
   final FocusNode passwordFocusNode = FocusNode();
   SignUpPage({Key? key}) : super(key: key);
 
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
     return Scaffold(
       backgroundColor: lightBackgroundColor,
       body: GestureDetector(
@@ -56,93 +57,105 @@ class SignUpPage extends GetView<AuthController> {
               ),
               child: Form(
                 key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // NOTE: FULL NAME INPUT
-                    CustomFormField(
-                      title: 'Username',
-                      inputType: TextInputType.text,
-                      controller: controller.usernameController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return ("Username cannot be Empty");
-                        }
-                        return null;
-                      },
-                      focusNode: usernameFocusNode,
+                child: Theme(
+                  data: ThemeData(
+                    inputDecorationTheme: InputDecorationTheme(
+                      errorStyle: TextStyle(color: purpleColor),
+                      errorBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: purpleColor),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    // NOTE: EMAIL INPUT
-                    CustomFormField(
-                      title: 'Email Address',
-                      inputType: TextInputType.text,
-                      controller: controller.emailController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return ("Email cannot be Empty");
-                        }
-                        return null;
-                      },
-                      focusNode: emailFocusNode,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // NOTE: FULL NAME INPUT
+                      CustomFormField(
+                        title: 'Username',
+                        inputType: TextInputType.text,
+                        controller: controller.usernameController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return ("Username cannot be Empty");
+                          }
+                          return null;
+                        },
+                        focusNode: usernameFocusNode,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      // NOTE: EMAIL INPUT
+                      CustomFormField(
+                        title: 'Email Address',
+                        inputType: TextInputType.text,
+                        controller: controller.emailController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return ("Email cannot be Empty");
+                          }
+                          return null;
+                        },
+                        focusNode: emailFocusNode,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
 
-                    // NOTE: PASSWORD INPUT
-                    CustomFormField(
-                      title: 'Password',
-                      obscureText: true,
-                      inputType: TextInputType.text,
-                      controller: controller.passwordController,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return ("Password cannot be Empty");
-                        }
-                        return null;
-                      },
-                      focusNode: passwordFocusNode,
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Obx(
-                      () => SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: TextButton(
-                          onPressed: controller.isLoading.value
-                              ? null
-                              : () async {
-                                  if (formKey.currentState!.validate()) {
-                                    await controller.postRegister();
-                                    await controller.postLogin(
+                      // NOTE: PASSWORD INPUT
+                      CustomFormField(
+                        title: 'Password',
+                        obscureText: true,
+                        inputType: TextInputType.text,
+                        controller: controller.passwordController,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return ("Password cannot be Empty");
+                          }
+                          return null;
+                        },
+                        focusNode: passwordFocusNode,
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Obx(
+                        () => SizedBox(
+                          width: double.infinity,
+                          height: 50,
+                          child: TextButton(
+                            onPressed: controller.isLoading.value
+                                ? null
+                                : () async {
+                                    if (formKey.currentState!.validate()) {
+                                      await controller.postRegister();
+                                      await controller.postLogin(
                                         true,
                                         controller.emailController.text,
                                         controller.passwordController.text,
-                                        context);
-                                  }
-                                },
-                          style: TextButton.styleFrom(
-                            backgroundColor: purpleColor,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(56),
+                                        context,
+                                      );
+                                    }
+                                  },
+                            style: TextButton.styleFrom(
+                              backgroundColor: purpleColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(56),
+                              ),
                             ),
-                          ),
-                          child: Text(
-                            'Berikutnya',
-                            style: whiteTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: semiBold,
+                            child: Text(
+                              'Berikutnya',
+                              style: whiteTextStyle.copyWith(
+                                fontSize: 16,
+                                fontWeight: semiBold,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

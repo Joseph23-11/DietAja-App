@@ -14,7 +14,7 @@ class MakananController extends GetxController
   final porsiTextController = TextEditingController();
   RxDouble valPorsi = 1.0.obs;
   RxString searchQuery = RxString('');
-
+  final selectedItems = <int>{}.obs;
   List<MakananModel> listMakanan = [];
 
   getFood() async {

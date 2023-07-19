@@ -203,15 +203,6 @@ class AuthController extends GetxController {
     try {
       isLoading.value = true;
 
-      // final email = emailController.text;
-      // final password = passwordController.text;
-
-      if (email.isEmpty || password.isEmpty) {
-        showCustomSnackbar(context, 'Semua field harus diisi', redColor);
-        isLoading.value = false;
-        return;
-      }
-
       final loginBody = {
         'email': email,
         'password': password,
