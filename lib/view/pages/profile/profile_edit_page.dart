@@ -1,6 +1,7 @@
 import 'package:diet_app/controllers/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../shared/helper.dart';
 import '../../../shared/theme.dart';
 import '../../widgets/button.dart';
 import '../../widgets/form.dart';
@@ -9,6 +10,7 @@ class ProfileEditPage extends GetView<UserController> {
   final FocusNode usernameFocusNode = FocusNode();
   final FocusNode emailFocusNode = FocusNode();
   final FocusNode passwordFocusNode = FocusNode();
+
   ProfileEditPage({Key? key}) : super(key: key);
 
   @override
@@ -86,12 +88,23 @@ class ProfileEditPage extends GetView<UserController> {
                   const SizedBox(
                     height: 30,
                   ),
-                  CustomFilledButton(
-                    title: 'Update Sekarang',
-                    onPressed: () async {
-                      controller.updateUserDataById();
-                      Get.toNamed('/success-page');
-                    },
+                  Obx(
+                    () => CustomFilledButton(
+                      title: 'Update Sekarang',
+                      onPressed: controller.isLoading.value
+                          ? null
+                          : () async {
+                              final password =
+                                  controller.passwordController.text;
+
+                              if (password.isEmpty) {
+                                showCustomSnackbar(context,
+                                    'Semua Field Harus diisi', redColor);
+                              } else {
+                                await controller.updateUserDataById(context);
+                              }
+                            },
+                    ),
                   ),
                 ],
               ),

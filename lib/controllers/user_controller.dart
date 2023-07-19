@@ -33,19 +33,25 @@ class UserController extends GetxController with StateMixin<UserModel> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
-  Future updateUserDataById() async {
+  Future<void> updateUserDataById(BuildContext context) async {
     try {
       isLoading.value = true;
 
+      final username = usernameController.text;
+      final email = emailController.text;
+      final password = passwordController.text;
+
       final body = {
-        'username': usernameController.text,
-        'email': emailController.text,
-        'password': passwordController.text,
+        'username': username,
+        'email': email,
+        'password': password,
       };
 
       await _userProvider.updateUserDataById(body);
 
       isLoading.value = false;
+
+      Get.toNamed('/success-page');
     } catch (e) {
       isLoading.value = false;
       print(e.toString());
