@@ -8,6 +8,8 @@ import '../../widgets/form.dart';
 
 class OnboardingPage4 extends GetView<AuthController> {
   final FocusNode targetFocusNode = FocusNode();
+  final _formKey = GlobalKey<FormState>();
+
   OnboardingPage4({Key? key}) : super(key: key);
 
   final ValueNotifier<String> _valBerat = ValueNotifier<String>('');
@@ -105,7 +107,6 @@ class OnboardingPage4 extends GetView<AuthController> {
                               min: 0.0,
                               max: 1,
                               divisions: 2,
-                              label: controller.currentLabel.value,
                               onChanged: (double value) {
                                 controller.updateSliderValue(value);
                               },
@@ -113,19 +114,31 @@ class OnboardingPage4 extends GetView<AuthController> {
                               inactiveColor: purpleColor,
                             ),
                           ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Rencana pengurangan berat badan anda:',
-                            style: blackTextStyle.copyWith(
-                              fontSize: 12,
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Lambat',
+                                  style: blackTextStyle.copyWith(fontSize: 12)),
+                              Text('Normal',
+                                  style: blackTextStyle.copyWith(fontSize: 12)),
+                              Text('Cepat',
+                                  style: blackTextStyle.copyWith(fontSize: 12)),
+                            ],
+                          ),
+                          SizedBox(height: 35),
+                          Row(
+                            children: [
+                              Column(
+                                children: [
+                                  Text(
+                                    'Rencana pengurangan berat badan anda:',
+                                    style: blackTextStyle.copyWith(
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ],
                       ),
@@ -173,49 +186,61 @@ class OnboardingPage4 extends GetView<AuthController> {
                       const SizedBox(
                         height: 40,
                       ),
-                      CustomFilledButton(
-                        title: "Berikutnya",
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => MoreDialog(
-                              beratAwal: controller.beratAwal.value,
-                              gender: controller.gender[0].value
-                                  ? 'Pria'
-                                  : 'Wanita',
-                              usia: int.parse(controller.usiaController.text),
-                              kalori: controller.kalori.value,
-                              tinggi: double.parse(
-                                  controller.tinggiController.text),
-                              totalPengurangan:
-                                  controller.totalPengurangan.value,
-                              onPressed: () async {
-                                print('siuuuuu');
-                                await controller.createPersonalDetails(
-                                  controller.gender[0].value
-                                      ? 'pria'
-                                      : 'wanita',
-                                  controller.beratAwal.value,
-                                  int.parse(controller.tinggiController.text),
-                                  int.parse(controller.usiaController.text),
-                                );
-
-                                await controller.createTarget(
-                                  controller.pal.value.toString(),
-                                  int.parse(controller.tecBerat.text),
-                                  controller.currentLabel.value
-                                      .toString()
-                                      .toLowerCase(),
-                                  controller.hari.value,
-                                  controller.kalori.value,
-                                  controller.totalPengurangan.value.toInt(),
-                                );
-                                Get.offAndToNamed('/main-page');
+                      Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            CustomFilledButton(
+                              title: "Berikutnya",
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => MoreDialog(
+                                      beratAwal: controller.beratAwal.value,
+                                      gender: controller.gender[0].value
+                                          ? 'Pria'
+                                          : 'Wanita',
+                                      usia: int.parse(
+                                          controller.usiaController.text),
+                                      kalori: controller.kalori.value,
+                                      tinggi: double.parse(
+                                          controller.tinggiController.text),
+                                      totalPengurangan:
+                                          controller.totalPengurangan.value,
+                                      onPressed: () async {
+                                        print('siuuuuu');
+                                        await controller.createPersonalDetails(
+                                          controller.gender[0].value
+                                              ? 'pria'
+                                              : 'wanita',
+                                          controller.beratAwal.value,
+                                          int.parse(
+                                              controller.tinggiController.text),
+                                          int.parse(
+                                              controller.usiaController.text),
+                                        );
+                                        await controller.createTarget(
+                                          controller.pal.value.toString(),
+                                          int.parse(controller.tecBerat.text),
+                                          controller.currentLabel.value
+                                              .toString()
+                                              .toLowerCase(),
+                                          controller.hari.value,
+                                          controller.kalori.value,
+                                          controller.totalPengurangan.value
+                                              .toInt(),
+                                        );
+                                        Get.offAndToNamed('/main-page');
+                                      },
+                                    ),
+                                  );
+                                }
                               },
                             ),
-                          );
-                        },
-                      ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 );

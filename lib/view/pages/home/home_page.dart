@@ -3197,225 +3197,215 @@ class _HomePageState extends State<HomePage> {
 
   Widget dialogPorsi(MakananModel model, context, int id, int makanan) {
     final controller = Get.find<MakananController>();
-
-    return AlertDialog(
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      insetPadding: EdgeInsets.zero,
-      content: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.all(25),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: whiteColor,
-        ),
-        child: Wrap(
+    return Dialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            Text(
+              model.namaMakanan!,
+              style: blackTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: semiBold,
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              '${model.ukuran}, • ${model.beratMakanan} g',
+              style: greyTextStyle.copyWith(
+                fontSize: 10,
+                fontWeight: medium,
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  model.namaMakanan!,
-                  style: blackTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
-                  ),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  '${model.ukuran}, • ${model.beratMakanan} g',
-                  style: greyTextStyle.copyWith(
-                    fontSize: 10,
-                    fontWeight: medium,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Obx(() {
-                      return detailPopup("Kalori", "${model.kalori}", "kcal",
-                          controller.valPorsi.value);
-                    }),
-                    Obx(() {
-                      return detailPopup("Karbohidrat", "${model.karbohidrat}",
-                          "g", controller.valPorsi.value);
-                    }),
-                    Obx(() {
-                      return detailPopup("Protein", "${model.protein}", "g",
-                          controller.valPorsi.value);
-                    }),
-                    Obx(() {
-                      return detailPopup("Lemak", "${model.lemak}", "g",
-                          controller.valPorsi.value);
-                    }),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "Porsi makanan",
-                  style: blackTextStyle.copyWith(
-                    fontSize: 16,
-                    fontWeight: semiBold,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          if (controller.valPorsi.value > 0.25) {
-                            controller.valPorsi.value -= 0.25;
-                            controller.porsiTextController.text =
-                                controller.valPorsi.value.toStringAsFixed(2);
-                          }
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 17,
-                            horizontal: 10,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: lightBackgroundColor,
-                          ),
-                          child: SvgPicture.asset("assets/minus_purple.svg"),
-                        ),
+                Obx(() {
+                  return detailPopup("Kalori", "${model.kalori}", "kcal",
+                      controller.valPorsi.value);
+                }),
+                Obx(() {
+                  return detailPopup("Karbohidrat", "${model.karbohidrat}", "g",
+                      controller.valPorsi.value);
+                }),
+                Obx(() {
+                  return detailPopup("Protein", "${model.protein}", "g",
+                      controller.valPorsi.value);
+                }),
+                Obx(() {
+                  return detailPopup("Lemak", "${model.lemak}", "g",
+                      controller.valPorsi.value);
+                }),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Porsi makanan",
+              style: blackTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: semiBold,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      if (controller.valPorsi.value > 0.25) {
+                        controller.valPorsi.value -= 0.25;
+                        controller.porsiTextController.text =
+                            controller.valPorsi.value.toStringAsFixed(2);
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 17,
+                        horizontal: 10,
                       ),
-                      SizedBox(width: 20),
-                      Container(
-                        width: 50,
-                        child: TextFormField(
-                          controller: controller.porsiTextController,
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          inputFormatters: [
-                            DotCommaTextInputFormatter(),
-                          ],
-                          onChanged: (value) {
-                            if (value.isEmpty) {
-                              // Handle empty value case
-                              controller.valPorsi.value = 0.0;
-                            } else {
-                              final parsedValue = double.tryParse(value);
-                              if (parsedValue != null && parsedValue >= 0.25) {
-                                controller.valPorsi.value = parsedValue;
-                              } else {
-                                controller.valPorsi.value = 0.25;
-                              }
-                            }
-                          },
-                          style: blackTextStyle.copyWith(
-                            fontSize: 16,
-                            fontWeight: semiBold,
-                          ),
-                          textAlign: TextAlign.center,
-                          cursorColor: purpleColor,
-                          decoration: InputDecoration(
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: purpleColor,
-                                width: 2,
-                              ),
-                            ),
-                          ),
-                        ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: lightBackgroundColor,
                       ),
-                      SizedBox(width: 20),
-                      InkWell(
-                        onTap: () {
-                          if (controller.valPorsi.value >= 0.25) {
-                            controller.valPorsi.value += 0.25;
-                            controller.porsiTextController.text =
-                                controller.valPorsi.value.toStringAsFixed(2);
-                          }
-                        },
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 7,
-                            horizontal: 10,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: lightBackgroundColor,
-                          ),
-                          child: SvgPicture.asset("assets/plus_purple.svg"),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Get.back();
-                      },
-                      child: Text(
-                        "Cancel",
-                        style: purpleTextStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: medium,
-                        ),
-                      ),
+                      child: SvgPicture.asset("assets/minus_purple.svg"),
                     ),
-                    SizedBox(
-                      width: 30,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        switch (makanan) {
-                          case 1:
-                            breakfastController.putBreakfast(
-                              id,
-                              controller.valPorsi.value,
-                              context,
-                            );
-                            break;
-                          case 2:
-                            lunchController.putLunch(
-                              id,
-                              controller.valPorsi.value,
-                              context,
-                            );
-                            break;
-                          case 3:
-                            dinnerController.putDinner(
-                              id,
-                              controller.valPorsi.value,
-                              context,
-                            );
-                            break;
-                          case 4:
-                            snackController.putSnack(
-                              id,
-                              controller.valPorsi.value,
-                              context,
-                            );
-                            break;
-                          default:
+                  ),
+                  SizedBox(width: 10),
+                  Container(
+                    width: 40,
+                    child: TextFormField(
+                      controller: controller.porsiTextController,
+                      keyboardType:
+                          TextInputType.numberWithOptions(decimal: true),
+                      inputFormatters: [
+                        DotCommaTextInputFormatter(),
+                      ],
+                      onChanged: (value) {
+                        if (value.isEmpty) {
+                          // Handle empty value case
+                          controller.valPorsi.value = 0.0;
+                        } else {
+                          final parsedValue = double.tryParse(value);
+                          if (parsedValue != null && parsedValue >= 0.25) {
+                            controller.valPorsi.value = parsedValue;
+                          } else {
+                            controller.valPorsi.value = 0.25;
+                          }
                         }
-
-                        Get.back(); // Menutup dialog setelah mengubah porsi
                       },
-                      child: Text(
-                        "Update",
-                        style: purpleTextStyle.copyWith(
-                          fontSize: 14,
-                          fontWeight: medium,
+                      style: blackTextStyle.copyWith(
+                        fontSize: 16,
+                        fontWeight: semiBold,
+                      ),
+                      textAlign: TextAlign.center,
+                      cursorColor: purpleColor,
+                      decoration: InputDecoration(
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(
+                            color: purpleColor,
+                            width: 2,
+                          ),
                         ),
                       ),
                     ),
-                  ],
+                  ),
+                  SizedBox(width: 10),
+                  InkWell(
+                    onTap: () {
+                      if (controller.valPorsi.value >= 0.25) {
+                        controller.valPorsi.value += 0.25;
+                        controller.porsiTextController.text =
+                            controller.valPorsi.value.toStringAsFixed(2);
+                      }
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 7,
+                        horizontal: 10,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: lightBackgroundColor,
+                      ),
+                      child: SvgPicture.asset("assets/plus_purple.svg"),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Text(
+                    "Cancel",
+                    style: purpleTextStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: medium,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: 30,
+                ),
+                InkWell(
+                  onTap: () async {
+                    switch (makanan) {
+                      case 1:
+                        breakfastController.putBreakfast(
+                          id,
+                          controller.valPorsi.value,
+                          context,
+                        );
+                        break;
+                      case 2:
+                        lunchController.putLunch(
+                          id,
+                          controller.valPorsi.value,
+                          context,
+                        );
+                        break;
+                      case 3:
+                        dinnerController.putDinner(
+                          id,
+                          controller.valPorsi.value,
+                          context,
+                        );
+                        break;
+                      case 4:
+                        snackController.putSnack(
+                          id,
+                          controller.valPorsi.value,
+                          context,
+                        );
+                        break;
+                      default:
+                    }
+                    Get.back(); // Menutup dialog setelah mengubah porsi
+                  },
+                  child: Text(
+                    "Update",
+                    style: purpleTextStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: medium,
+                    ),
+                  ),
                 ),
               ],
             ),
