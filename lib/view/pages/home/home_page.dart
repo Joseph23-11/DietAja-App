@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                 width: double.infinity,
                 height: 207,
                 margin: const EdgeInsets.only(
-                  top: 30,
+                  top: 20,
                 ),
                 padding: EdgeInsets.all(22),
                 decoration: BoxDecoration(
@@ -3057,33 +3057,34 @@ class _HomePageState extends State<HomePage> {
     }
 
     return SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 2),
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              floating: true,
-              pinned: true,
-              snap: false,
-              flexibleSpace: buildCalender(),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  buildCard(),
-                  microCard(context),
-                  sarapanCard(),
-                  makanSiangCard(),
-                  makanMalamCard(),
-                  snackCard(),
-                  aktifitasCard(),
-                  waterCard(),
-                  beratBadanCard(),
-                  kosongCard(),
-                ],
+      child: Container(
+        color: lightBackgroundColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 2),
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                pinned: true,
+                flexibleSpace: buildCalender(),
               ),
-            ),
-          ],
+              SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    buildCard(),
+                    microCard(context),
+                    sarapanCard(),
+                    makanSiangCard(),
+                    makanMalamCard(),
+                    snackCard(),
+                    aktifitasCard(),
+                    waterCard(),
+                    beratBadanCard(),
+                    kosongCard(),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
