@@ -140,8 +140,8 @@ class MainPage extends GetView<MainPageController> {
 
     Widget body() {
       return PageView(
-        controller: pageController, // Assign the PageController
-        physics: NeverScrollableScrollPhysics(), // Disable page swiping
+        controller: pageController,
+        physics: NeverScrollableScrollPhysics(),
         children: [
           HomePage(),
           NutrisiPage(),

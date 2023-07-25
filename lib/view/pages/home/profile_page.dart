@@ -136,23 +136,28 @@ class ProfilePage extends GetView<UserController> {
       );
     }
 
-    return ListView(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
+    return Scaffold(
+      backgroundColor: lightBackgroundColor,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            children: [
+              header(),
+              const SizedBox(
+                height: 30,
+              ),
+              content(),
+              const SizedBox(
+                height: 35,
+              ),
+              CustomTextButton(
+                title: 'Report a Problem',
+              ),
+            ],
+          ),
+        ),
       ),
-      children: [
-        header(),
-        const SizedBox(
-          height: 30,
-        ),
-        content(),
-        const SizedBox(
-          height: 35,
-        ),
-        CustomTextButton(
-          title: 'Report a Problem',
-        ),
-      ],
     );
   }
 }

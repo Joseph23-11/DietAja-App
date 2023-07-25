@@ -450,7 +450,7 @@ class _HomePageState extends State<HomePage> {
                 width: double.infinity,
                 height: 207,
                 margin: const EdgeInsets.only(
-                  top: 30,
+                  top: 20,
                 ),
                 padding: EdgeInsets.all(22),
                 decoration: BoxDecoration(

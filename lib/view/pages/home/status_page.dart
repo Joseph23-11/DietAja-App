@@ -39,16 +39,17 @@ class _StatusPageState extends State<StatusPage> {
     final targetController = Get.find<TargetController>();
 
     return Scaffold(
+      backgroundColor: lightBackgroundColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          "Status anda",
+          "Status",
           style: blackTextStyle.copyWith(fontSize: 20, fontWeight: semiBold),
         ),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
           child: Column(
             children: [
               Container(
