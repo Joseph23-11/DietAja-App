@@ -3060,11 +3060,11 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         color: lightBackgroundColor,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
-                pinned: true,
+                floating: true,
                 flexibleSpace: buildCalender(),
               ),
               SliverList(
