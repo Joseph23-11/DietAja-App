@@ -74,9 +74,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Widget buildCalender() {
       return Container(
-        margin: const EdgeInsets.only(
-          top: 50,
-        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -3059,23 +3056,36 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    return ListView(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24,
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 2),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              floating: true,
+              pinned: true,
+              snap: false,
+              flexibleSpace: buildCalender(),
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  buildCard(),
+                  microCard(context),
+                  sarapanCard(),
+                  makanSiangCard(),
+                  makanMalamCard(),
+                  snackCard(),
+                  aktifitasCard(),
+                  waterCard(),
+                  beratBadanCard(),
+                  kosongCard(),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      children: [
-        buildCalender(),
-        buildCard(),
-        microCard(context),
-        sarapanCard(),
-        makanSiangCard(),
-        makanMalamCard(),
-        snackCard(),
-        aktifitasCard(),
-        waterCard(),
-        beratBadanCard(),
-        kosongCard(),
-      ],
     );
   }
 
