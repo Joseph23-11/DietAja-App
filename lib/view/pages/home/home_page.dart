@@ -3065,6 +3065,7 @@ class _HomePageState extends State<HomePage> {
             slivers: [
               SliverAppBar(
                 floating: true,
+                automaticallyImplyLeading: false,
                 flexibleSpace: buildCalender(),
               ),
               SliverList(
