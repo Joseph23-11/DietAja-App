@@ -41,13 +41,6 @@ class _HomePageState extends State<HomePage> {
   final ValueNotifier<String> _valPostDate = ValueNotifier("");
 
   @override
-  void initState() {
-    waterController.loadGlassSelection();
-
-    super.initState();
-  }
-
-  @override
   void dispose() {
     homePageController.valDate.removeListener(_onDateChanged);
     _currentPage.dispose();
@@ -74,99 +67,102 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Widget buildCalender() {
       return Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Hallo,',
-                  style: greyTextStyle.copyWith(
-                    fontSize: 16,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.keyboard_arrow_left_rounded,
-                      color: greyColor,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        showDatePicker(
-                          context: context,
-                          initialDate: DateTime.now(),
-                          firstDate: DateTime(1945),
-                          lastDate: DateTime(3000),
-                          builder: (BuildContext context, Widget? child) {
-                            return Theme(
-                              data: ThemeData.light().copyWith(
-                                colorScheme: ColorScheme.light(
-                                  primary: purpleColor,
-                                ),
-                                dialogBackgroundColor: whiteColor,
-                              ),
-                              child: child!,
-                            );
-                          },
-                        ).then((date) {
-                          if (date != null) {
-                            setState(() {
-                              homePageController.valDate.value =
-                                  homePageController.dateFormat.format(date);
-                              print(
-                                  'tanggal : ${homePageController.valDate.value}');
-                              _valPostDate.value = postDateFormat.format(date);
-                              dailyDietController.postSearchingDailyDietByDate(
-                                  _valPostDate.value.toString());
-                            });
-                          } else {
-                            // Ketika pemilihan tanggal dibatalkan
-                          }
-                        });
-                      },
-                      child: Row(
-                        children: [
-                          SvgPicture.asset("assets/cake.svg"),
-                          Padding(
-                            padding: EdgeInsets.only(left: 10),
-                            child: ValueListenableBuilder<String>(
-                              valueListenable: homePageController.valDate,
-                              builder: (_, newDate, __) {
-                                return Text(
-                                  newDate,
-                                  style: greyTextStyle.copyWith(
-                                    fontSize: 16,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Icon(
-                      Icons.keyboard_arrow_right_rounded,
-                      color: greyColor,
-                    ),
-                  ],
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 2,
-            ),
-            userController.obx(
-              (data) => Text(
-                data!.username!,
-                style: blackTextStyle.copyWith(
-                  fontSize: 20,
-                  fontWeight: semiBold,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Hallo,',
+                style: greyTextStyle.copyWith(
+                  fontSize: 16,
                 ),
               ),
-            ),
-          ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: userController.obx(
+                      (data) => Text(
+                        data!.username!,
+                        style: blackTextStyle.copyWith(
+                          fontSize: 20,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.keyboard_arrow_left_rounded,
+                        color: greyColor,
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1945),
+                            lastDate: DateTime(3000),
+                            builder: (BuildContext context, Widget? child) {
+                              return Theme(
+                                data: ThemeData.light().copyWith(
+                                  colorScheme: ColorScheme.light(
+                                    primary: purpleColor,
+                                  ),
+                                  dialogBackgroundColor: whiteColor,
+                                ),
+                                child: child!,
+                              );
+                            },
+                          ).then((date) {
+                            if (date != null) {
+                              setState(() {
+                                homePageController.valDate.value =
+                                    homePageController.dateFormat.format(date);
+                                print(
+                                    'tanggal : ${homePageController.valDate.value}');
+                                _valPostDate.value =
+                                    postDateFormat.format(date);
+                                dailyDietController
+                                    .postSearchingDailyDietByDate(
+                                        _valPostDate.value.toString());
+                              });
+                            } else {
+                              // Ketika pemilihan tanggal dibatalkan
+                            }
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            SvgPicture.asset("assets/cake.svg"),
+                            Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: ValueListenableBuilder<String>(
+                                valueListenable: homePageController.valDate,
+                                builder: (_, newDate, __) {
+                                  return Text(
+                                    newDate,
+                                    style: greyTextStyle.copyWith(
+                                      fontSize: 16,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Icon(
+                        Icons.keyboard_arrow_right_rounded,
+                        color: greyColor,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       );
     }
@@ -2134,103 +2130,101 @@ class _HomePageState extends State<HomePage> {
     }
 
     Widget snackCard() {
-      return Obx(
-        () => dailyDietController.isToday.value
-            ? snackController.obx(
-                (data) => Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(
-                    top: 24,
-                  ),
-                  padding: EdgeInsets.all(22),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24),
-                    color: whiteColor,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Snack',
+      return Obx(() => dailyDietController.isToday.value
+          ? snackController.obx(
+              (data) => Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(
+                  top: 24,
+                ),
+                padding: EdgeInsets.all(22),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  color: whiteColor,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Snack',
+                          style: blackTextStyle.copyWith(
+                            fontSize: 16,
+                            fontWeight: semiBold,
+                          ),
+                        ),
+                        Obx(
+                          () => Text(
+                            '${snackController.snack.value} / ${targetController.batasSnack.value} kcal ',
                             style: blackTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: semiBold,
+                              fontSize: 12,
+                              fontWeight: medium,
                             ),
                           ),
-                          Obx(
-                            () => Text(
-                              '${snackController.snack.value} / ${targetController.batasSnack.value} kcal ',
-                              style: blackTextStyle.copyWith(
-                                fontSize: 12,
-                                fontWeight: medium,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      if (data!.isNotEmpty)
-                        SizedBox(
-                          height: snackController.heightSnack.value.toDouble(),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: ListView.separated(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 4.0,
-                                  ),
-                                  separatorBuilder: (context, index) {
-                                    return Divider(
-                                      color: greyColor,
-                                    );
-                                  },
-                                  itemCount: data.length,
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {
-                                        showDialog(
-                                          context: context,
-                                          builder: (BuildContext thisContext) {
-                                            final makananModel = MakananModel(
-                                              namaMakanan:
-                                                  data[index].namaMakanan,
-                                              ukuran:
-                                                  '${data[index].porsiMakanan}',
-                                              beratMakanan: 100,
-                                              kalori: data[index].kalori,
-                                              karbohidrat:
-                                                  data[index].karbohidrat,
-                                              protein: data[index].protein,
-                                              lemak: data[index].lemak,
-                                            );
+                        ),
+                      ],
+                    ),
+                    data!.isNotEmpty
+                        ? SizedBox(
+                            height:
+                                snackController.heightSnack.value.toDouble(),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: ListView.separated(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 4.0),
+                                    separatorBuilder: (context, index) {
+                                      return Divider(
+                                        color: greyColor,
+                                      );
+                                    },
+                                    itemCount: data.length,
+                                    itemBuilder: (context, index) {
+                                      return InkWell(
+                                        onTap: () {
+                                          showDialog(
+                                            context: context,
+                                            builder:
+                                                (BuildContext thisContext) {
+                                              final makananModel = MakananModel(
+                                                namaMakanan:
+                                                    data[index].namaMakanan,
+                                                ukuran:
+                                                    '${data[index].porsiMakanan}',
+                                                beratMakanan: 100,
+                                                kalori: data[index].kalori,
+                                                karbohidrat:
+                                                    data[index].karbohidrat,
+                                                protein: data[index].protein,
+                                                lemak: data[index].lemak,
+                                              );
 
-                                            return dialogPorsi(
-                                              makananModel,
-                                              context,
-                                              data[index].id!,
-                                              4,
-                                            );
-                                          },
-                                        );
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0,
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Expanded(
-                                                  child: Text(
+                                              return dialogPorsi(
+                                                makananModel,
+                                                context,
+                                                data[index].id!,
+                                                3,
+                                              );
+                                            },
+                                          );
+                                        },
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 8.0),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
                                                     '${data[index].namaMakanan}',
                                                     style:
                                                         blackTextStyle.copyWith(
@@ -2238,169 +2232,160 @@ class _HomePageState extends State<HomePage> {
                                                       fontWeight: semiBold,
                                                     ),
                                                   ),
-                                                ),
-                                                InkWell(
-                                                  onTap: () {
-                                                    showDialog(
-                                                      context: context,
-                                                      builder: (BuildContext
-                                                          thisContext) {
-                                                        return dialogDelete(
-                                                          () {
-                                                            snackController
-                                                                .delSnack(
-                                                              data[index].id!,
-                                                              context,
-                                                            );
-                                                          },
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Icon(
-                                                    Icons.close_rounded,
-                                                    color: greyColor,
+                                                  InkWell(
+                                                    onTap: () {
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext
+                                                            thisContext) {
+                                                          return dialogDelete(
+                                                            () {
+                                                              snackController
+                                                                  .delSnack(
+                                                                      data[index]
+                                                                          .id!,
+                                                                      context);
+                                                            },
+                                                          );
+                                                        },
+                                                      );
+                                                    },
+                                                    child: Icon(
+                                                      Icons.close_rounded,
+                                                      color: greyColor,
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                              const SizedBox(
+                                                height: 8,
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    '${data[index].porsiMakanan}, • 100 g',
+                                                    style:
+                                                        greyTextStyle.copyWith(
+                                                      fontSize: 10,
+                                                      fontWeight: medium,
+                                                    ),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                            const SizedBox(
-                                              height: 8,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  '${data[index].porsiMakanan}, • 100 g',
-                                                  style: greyTextStyle.copyWith(
-                                                    fontSize: 10,
-                                                    fontWeight: medium,
+                                                  Text(
+                                                    '${data[index].kalori} kcal',
+                                                    style:
+                                                        greyTextStyle.copyWith(
+                                                      fontSize: 10,
+                                                      fontWeight: medium,
+                                                    ),
                                                   ),
-                                                ),
-                                                Text(
-                                                  '${data[index].kalori} kcal',
-                                                  style: greyTextStyle.copyWith(
-                                                    fontSize: 10,
-                                                    fontWeight: medium,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                          )
+                        : Text(
+                            'Anda belum memasukkan makanan',
+                            style: greyTextStyle.copyWith(
+                              fontSize: 12,
+                              fontWeight: medium,
+                            ),
                           ),
-                        )
-                      else
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/ic_snack.png',
+                          width: 70,
+                          height: 50,
+                        ),
+                        Column(
+                          children: [
+                            CustomTambahButton(
+                              title: '+ Tambah',
+                              onTap: () {
+                                Get.toNamed(
+                                  '/makanan-page',
+                                  arguments: 'snacks',
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
+          : dailyDietController.obx(
+              (data) => Container(
+                width: double.infinity,
+                margin: const EdgeInsets.only(
+                  top: 24,
+                ),
+                padding: EdgeInsets.all(22),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  color: whiteColor,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
                         Text(
-                          'Anda belum memasukkan makanan',
-                          style: greyTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: medium,
+                          'Snack',
+                          style: blackTextStyle.copyWith(
+                            fontSize: 16,
+                            fontWeight: semiBold,
                           ),
                         ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/ic_snack.png',
-                            width: 70,
-                            height: 50,
-                          ),
-                          Column(
-                            children: [
-                              CustomTambahButton(
-                                title: '+ Tambah',
-                                onTap: () {
-                                  Get.toNamed(
-                                    '/makanan-page',
-                                    arguments: 'snacks',
-                                  );
-                                },
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              )
-            : dailyDietController.obx(
-                (data) => Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.only(
-                    top: 24,
-                  ),
-                  padding: EdgeInsets.all(22),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(24),
-                    color: whiteColor,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Snack',
+                        Obx(
+                          () => Text(
+                            '${data!.totalKaloriSnack} / ${targetController.batasSnack.value} kcal ',
                             style: blackTextStyle.copyWith(
-                              fontSize: 16,
-                              fontWeight: semiBold,
+                              fontSize: 12,
+                              fontWeight: medium,
                             ),
                           ),
-                          Obx(
-                            () => Text(
-                              '${snackController.snack.value} / ${targetController.batasSnack.value} kcal ',
-                              style: blackTextStyle.copyWith(
-                                fontSize: 12,
-                                fontWeight: medium,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      if (data!.snacks!.isNotEmpty)
-                        SizedBox(
-                          height:
-                              dailyDietController.heightSnack.value.toDouble(),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: ListView.separated(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 4.0,
-                                  ),
-                                  separatorBuilder: (context, index) {
-                                    return Divider(
-                                      color: greyColor,
-                                    );
-                                  },
-                                  itemCount: data.snacks!.length,
-                                  itemBuilder: (context, index) {
-                                    return InkWell(
-                                      onTap: () {
-                                        Get.toNamed(
-                                          '/makanan-page',
-                                          arguments: 'snacks',
-                                        );
-                                      },
-                                      child: Padding(
+                        ),
+                      ],
+                    ),
+                    data!.snacks!.isNotEmpty
+                        ? SizedBox(
+                            height: dailyDietController.heightSnack.value
+                                .toDouble(),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: ListView.separated(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 4.0),
+                                    separatorBuilder: (context, index) {
+                                      return Divider(
+                                        color: greyColor,
+                                      );
+                                    },
+                                    itemCount: data.snacks!.length,
+                                    itemBuilder: (context, index) {
+                                      return Padding(
                                         padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0,
-                                        ),
+                                            vertical: 8.0),
                                         child: Column(
                                           children: [
                                             Row(
@@ -2424,7 +2409,7 @@ class _HomePageState extends State<HomePage> {
                                                     Icons.close_rounded,
                                                     color: greyColor,
                                                   ),
-                                                ),
+                                                )
                                               ],
                                             ),
                                             const SizedBox(
@@ -2453,48 +2438,45 @@ class _HomePageState extends State<HomePage> {
                                             ),
                                           ],
                                         ),
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                          )
+                        : Text(
+                            'Anda belum memasukkan makanan',
+                            style: greyTextStyle.copyWith(
+                              fontSize: 12,
+                              fontWeight: medium,
+                            ),
                           ),
-                        )
-                      else
-                        Text(
-                          'Anda belum memasukkan makanan',
-                          style: greyTextStyle.copyWith(
-                            fontSize: 12,
-                            fontWeight: medium,
-                          ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Image.asset(
+                          'assets/ic_snack.png',
+                          width: 70,
+                          height: 50,
                         ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Image.asset(
-                            'assets/ic_snack.png',
-                            width: 70,
-                            height: 50,
-                          ),
-                          Column(
-                            children: [
-                              CustomTambahButton(
-                                title: '+ Tambah',
-                                onTap: () {},
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        Column(
+                          children: [
+                            CustomTambahButton(
+                              title: '+ Tambah',
+                              onTap: () {},
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-      );
+            ));
     }
 
     Widget aktifitasCard() {
@@ -2862,9 +2844,7 @@ class _HomePageState extends State<HomePage> {
         builder: (controller) {
           DateTime selectedDate = homePageController.dateFormat
               .parse(homePageController.valDate.value);
-
           bool isEmptyWaterCard = selectedDate.isAfter(DateTime.now());
-
           return Container(
             width: double.infinity,
             height: 207,

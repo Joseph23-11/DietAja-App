@@ -236,21 +236,21 @@ class _NotificationMealsState extends State<NotificationMeals> {
                       Expanded(
                         child: CupertinoPicker.builder(
                           scrollController: FixedExtentScrollController(
-                            initialItem: initialHour + 2400,
+                            initialItem: initialHour - 1 + 24,
                           ),
                           itemExtent: 40,
                           onSelectedItemChanged: (int index) {
-                            initialHour = index % 24;
+                            initialHour = (index % 24) + 1;
                             selectedTime = TimeOfDay(
                               hour: initialHour,
                               minute: initialMinute,
                             );
                           },
                           itemBuilder: (BuildContext context, int index) {
-                            final hour = index % 24;
+                            final hour = (index % 24) + 1;
                             return Center(
                               child: Text(
-                                '$hour',
+                                hour < 10 ? '0$hour' : '$hour',
                                 style: blackTextStyle.copyWith(fontSize: 24),
                               ),
                             );
@@ -260,21 +260,21 @@ class _NotificationMealsState extends State<NotificationMeals> {
                       Expanded(
                         child: CupertinoPicker.builder(
                           scrollController: FixedExtentScrollController(
-                            initialItem: initialMinute,
+                            initialItem: initialMinute - 1,
                           ),
                           itemExtent: 40,
                           onSelectedItemChanged: (int index) {
-                            initialMinute = index % 60;
+                            initialMinute = (index % 60) + 1;
                             selectedTime = TimeOfDay(
                               hour: initialHour,
                               minute: initialMinute,
                             );
                           },
                           itemBuilder: (BuildContext context, int index) {
-                            final minute = index % 60;
+                            final minute = (index % 60) + 1;
                             return Center(
                               child: Text(
-                                '$minute',
+                                minute < 10 ? '0$minute' : '$minute',
                                 style: blackTextStyle.copyWith(fontSize: 24),
                               ),
                             );

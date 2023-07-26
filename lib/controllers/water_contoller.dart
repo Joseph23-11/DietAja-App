@@ -1,18 +1,22 @@
 import 'package:carousel_slider/carousel_controller.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/model_air.dart';
+import 'home_page_controller.dart';
 
 class WaterController extends GetxController {
   late RxList<ModelAir> valAir;
   final carouselController = CarouselController().obs;
   RxInt currentIndex = 0.obs;
   RxInt indicatorIndex = 0.obs;
+  late HomePageController homePageController;
+  late RxMap<String, List<ModelAir>> waterData;
 
   @override
   void onInit() {
     super.onInit();
+    homePageController = Get.find<HomePageController>();
+
     valAir = [
       ModelAir(isSelected: false, index: 0),
       ModelAir(isSelected: false, index: 1),
@@ -32,11 +36,29 @@ class WaterController extends GetxController {
       ModelAir(isSelected: false, index: 15),
     ].obs;
     _loadGlassSelection();
+
+    DateTime selectedDate =
+        homePageController.dateFormat.parse(homePageController.valDate.value);
+    if (isTomorrowOrLater(selectedDate)) {
+      resetWaterData();
+    }
   }
 
-  void resetWaterData() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('selectedGlasses');
+  bool isTomorrowOrLater(DateTime selectedDate) {
+    final now = DateTime.now();
+    return selectedDate.isAfter(DateTime(now.year, now.month, now.day));
+  }
+
+  void resetWaterData({bool reset = true}) async {
+    if (reset) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove('selectedGlasses');
+      for (var glass in valAir) {
+        glass.isSelected = false;
+        glass.volume = null;
+      }
+      update();
+    }
   }
 
   void toggleSelected(int index) {
@@ -106,17 +128,5 @@ class WaterController extends GetxController {
         .map((glass) => glass.index.toString())
         .toList();
     await prefs.setStringList('selectedGlasses', selectedGlasses);
-  }
-
-  Future<void> loadGlassSelection() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? selectedGlasses = prefs.getStringList('selectedGlasses');
-    if (selectedGlasses != null) {
-      for (int i = 0; i < valAir.length; i++) {
-        if (selectedGlasses.contains(valAir[i].index.toString())) {
-          valAir[i].isSelected = true;
-        }
-      }
-    }
   }
 }
