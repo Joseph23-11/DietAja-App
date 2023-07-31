@@ -2202,12 +2202,11 @@ class _HomePageState extends State<HomePage> {
                                                 protein: data[index].protein,
                                                 lemak: data[index].lemak,
                                               );
-
                                               return dialogPorsi(
                                                 makananModel,
                                                 context,
                                                 data[index].id!,
-                                                3,
+                                                4,
                                               );
                                             },
                                           );

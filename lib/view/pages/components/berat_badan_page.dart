@@ -21,12 +21,12 @@ class BeratBadanPage extends GetView<PerubahanBeratController> {
           controller.obx(
             (data) => Expanded(
               child: ListView.builder(
-                padding: const EdgeInsets.all(12),
+                padding: const EdgeInsets.all(14),
                 itemCount: data!.length,
                 itemBuilder: (context, index) {
                   return Container(
                     padding: const EdgeInsets.all(20),
-                    margin: const EdgeInsets.only(bottom: 10),
+                    margin: const EdgeInsets.only(bottom: 18),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: whiteColor,
@@ -34,17 +34,21 @@ class BeratBadanPage extends GetView<PerubahanBeratController> {
                     child: Column(
                       children: [
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(
-                              child: Text(
-                                data[index].createdAt!.substring(0, 10),
-                                style: blackTextStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: semiBold,
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  data[index].createdAt!.substring(0, 10),
+                                  style: blackTextStyle.copyWith(
+                                    fontSize: 14,
+                                    fontWeight: semiBold,
+                                  ),
                                 ),
                               ),
                             ),
-                            const SizedBox(width: 12),
+                            const SizedBox(width: 22),
                             Text(
                               '${data[index].beratSekarang} kg',
                               style: purpleTextStyle.copyWith(
@@ -89,6 +93,9 @@ class BeratBadanPage extends GetView<PerubahanBeratController> {
               ),
             ),
           ),
+          Container(
+            height: 45,
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton(
