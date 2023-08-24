@@ -62,7 +62,7 @@ class _NutrisiPageState extends State<NutrisiPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Makronutrisi",
+                              "Makronutrien",
                               style: blackTextStyle.copyWith(
                                   fontSize: 16, fontWeight: semiBold),
                             ),
@@ -202,7 +202,7 @@ class _NutrisiPageState extends State<NutrisiPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Makronutrisi",
+                              "Makronutrien",
                               style: blackTextStyle.copyWith(
                                   fontSize: 16, fontWeight: semiBold),
                             ),

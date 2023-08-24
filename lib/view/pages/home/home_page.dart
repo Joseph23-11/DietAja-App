@@ -42,13 +42,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    homePageController.valDate.removeListener(_onDateChanged);
     _currentPage.dispose();
     super.dispose();
-  }
-
-  void _onDateChanged() {
-    waterController.resetWaterData();
   }
 
   final ValueNotifier<int> _currentPage = ValueNotifier(0);
@@ -2843,7 +2838,7 @@ class _HomePageState extends State<HomePage> {
         builder: (controller) {
           DateTime selectedDate = homePageController.dateFormat
               .parse(homePageController.valDate.value);
-          bool isEmptyWaterCard = selectedDate.isAfter(DateTime.now());
+          bool resetWaterData = selectedDate.isAfter(DateTime.now());
           return Container(
             width: double.infinity,
             height: 207,
@@ -2882,8 +2877,55 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 28,
                 ),
-                isEmptyWaterCard
-                    ? Container()
+                resetWaterData
+                    ? CarouselSlider(
+                        items: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: List.generate(
+                              8,
+                              (index) => GestureDetector(
+                                onTap: () {
+                                  if (controller.currentIndex.value == 0) {
+                                    controller.resetWaterData(
+                                        reset: resetWaterData);
+                                  }
+                                  controller.toggleSelected(index + 8);
+                                  controller.saveGlassSelection();
+                                },
+                                child: singleGlass(controller, index + 8),
+                              ),
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: List.generate(
+                              8,
+                              (index) => GestureDetector(
+                                onTap: () {
+                                  if (controller.currentIndex.value == 0) {
+                                    controller.resetWaterData(
+                                        reset: resetWaterData);
+                                  }
+                                  controller.toggleSelected(index + 8);
+                                  controller.saveGlassSelection();
+                                },
+                                child: singleGlass(controller, index + 8),
+                              ),
+                            ),
+                          ),
+                        ],
+                        options: CarouselOptions(
+                          viewportFraction: 1,
+                          enableInfiniteScroll: false,
+                          height: 60,
+                          onPageChanged: (index, reason) {
+                            if (reason == CarouselPageChangedReason.manual) {
+                              controller.updateCarouselIndex(index);
+                            }
+                          },
+                        ),
+                      )
                     : CarouselSlider(
                         items: [
                           Row(
@@ -2892,6 +2934,9 @@ class _HomePageState extends State<HomePage> {
                               8,
                               (index) => GestureDetector(
                                 onTap: () {
+                                  if (controller.currentIndex.value == 0) {
+                                    controller.resetWaterData();
+                                  }
                                   controller.toggleSelected(index);
                                   controller.saveGlassSelection();
                                 },

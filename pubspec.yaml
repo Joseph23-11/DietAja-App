@@ -49,7 +49,6 @@ dependencies:
   flutter_native_timezone: ^2.0.0
   http: ^1.0.0
   get: ^4.6.5
-  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
