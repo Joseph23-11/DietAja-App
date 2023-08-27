@@ -559,14 +559,14 @@ class _HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(55),
                         child: Obx(() {
                           final double progressValue =
-                              (breakfastController.breakfast.value +
-                                      lunchController.lunch.value +
-                                      dinnerController.dinner.value +
-                                      snackController.snack.value) /
+                              ((data.totalKaloriBreakfast!.toInt() +
+                                      data.totalKaloriLunch!.toInt() +
+                                      data.totalKaloriDinner!.toInt() +
+                                      data.totalKaloriSnack!.toInt())) /
                                   (targetController.kalori.value +
                                       sportDailyController.sport.value);
                           return LinearProgressIndicator(
-                            value: dailyDietController.isToday.value
+                            value: data.totalKaloriDaily != null
                                 ? progressValue
                                 : 0,
                             minHeight: 5,
@@ -617,7 +617,7 @@ class _HomePageState extends State<HomePage> {
                                 Obx(
                                   () => sportDailyController.sport.value != 0
                                       ? Text(
-                                          '+${sportDailyController.sport.value}',
+                                          '+${data.totalKaloriDailySport!.toInt()}',
                                           style: whiteTextStyle.copyWith(
                                             fontSize: 14,
                                             fontWeight: medium,

@@ -101,7 +101,6 @@ class BreakfastController extends GetxController
 
       await _makananProvider.putBreakfast(body, id);
 
-      // Menampilkan notifikasi jika porsi berhasil diubah
       showCustomSnackbar(
           context, 'Berhasil mengedit porsi Breakfast', Colors.greenAccent);
 
